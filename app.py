@@ -3,24 +3,33 @@ from database import connect_db, generate_code
 
 st.set_page_config(page_title="Smart Campus Chatbot", layout="wide")
 
+if "user_type" not in st.session_state:
+    st.session_state.user_type = None
+
+if "username" not in st.session_state:
+    st.session_state.username = None
+
+def logout():
+    st.session_state.user_type = None
+    st.session_state.username = None
+    st.rerun()
+
 st.title("🎓 Smart Campus Chatbot")
-st.subheader("AI Assistant for Schools & Students")
 
 menu = st.sidebar.selectbox(
-    "Choose Option",
-    ["Home", "School Register", "Student Register"]
+    "Menu",
+    ["Home", "School Register", "Student Register", "Login"]
 )
 
 # HOME
 if menu == "Home":
     st.write("Welcome to Smart Campus Chatbot")
-    st.write("Schools upload academic data, students ask questions.")
 
 # SCHOOL REGISTER
 elif menu == "School Register":
     st.header("School Registration")
 
-    school_name = st.text_input("School / College Name")
+    school_name = st.text_input("School Name")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
@@ -38,8 +47,8 @@ elif menu == "School Register":
         conn.commit()
         conn.close()
 
-        st.success(f"School Registered Successfully!")
-        st.info(f"Your School Code: {code}")
+        st.success("Registered Successfully")
+        st.info(f"School Code: {code}")
 
 # STUDENT REGISTER
 elif menu == "Student Register":
@@ -51,7 +60,6 @@ elif menu == "Student Register":
     school_code = st.text_input("School Code")
 
     if st.button("Register Student"):
-
         conn = connect_db()
         cur = conn.cursor()
 
@@ -63,4 +71,59 @@ elif menu == "Student Register":
         conn.commit()
         conn.close()
 
-        st.success("Student Registered Successfully!")
+        st.success("Student Registered Successfully")
+
+# LOGIN
+elif menu == "Login":
+    st.header("Login")
+
+    role = st.selectbox("Login As", ["School", "Student"])
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        conn = connect_db()
+        cur = conn.cursor()
+
+        if role == "School":
+            cur.execute(
+                "SELECT * FROM schools WHERE username=? AND password=?",
+                (username, password)
+            )
+            user = cur.fetchone()
+
+            if user:
+                st.session_state.user_type = "school"
+                st.session_state.username = username
+                st.success("School Login Successful")
+            else:
+                st.error("Invalid Login")
+
+        else:
+            cur.execute(
+                "SELECT * FROM students WHERE username=? AND password=?",
+                (username, password)
+            )
+            user = cur.fetchone()
+
+            if user:
+                st.session_state.user_type = "student"
+                st.session_state.username = username
+                st.success("Student Login Successful")
+            else:
+                st.error("Invalid Login")
+
+        conn.close()
+
+# DASHBOARDS
+if st.session_state.user_type == "school":
+    st.sidebar.success("School Dashboard")
+    st.write(f"Welcome School: {st.session_state.username}")
+    if st.button("Logout"):
+        logout()
+
+elif st.session_state.user_type == "student":
+    st.sidebar.success("Student Dashboard")
+    st.write(f"Welcome Student: {st.session_state.username}")
+    if st.button("Logout"):
+        logout()
