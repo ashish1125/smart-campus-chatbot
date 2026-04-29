@@ -285,7 +285,28 @@ if st.session_state.user_type == "institute":
     st.subheader("Uploaded Files")
 
     for file in files:
-        st.write("📄", file[0])
+
+        col1, col2 = st.columns([4, 1])
+
+        with col1:
+            st.write("📄", file[0])
+
+        with col2:
+            if st.button("Delete", key=file[0]):
+
+                conn = connect_db()
+                cur = conn.cursor()
+
+                cur.execute("""
+                DELETE FROM documents
+                WHERE username=? AND filename=?
+                """, (st.session_state.username, file[0]))
+
+                conn.commit()
+                conn.close()
+
+                st.success(f"{file[0]} deleted successfully")
+                st.rerun()
 
     st.markdown("---")
 
