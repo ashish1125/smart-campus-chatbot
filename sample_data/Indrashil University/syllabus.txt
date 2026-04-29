@@ -1,0 +1,39 @@
+Indrashil University
+
+Faculty of Engineering and Technology
+Computer Engineering - Semester 6
+
+Subject 1: Artificial Intelligence
+Unit 1: Introduction to Artificial Intelligence
+Unit 2: Problem Solving and Search Techniques
+Unit 3: Knowledge Representation
+Unit 4: Machine Learning Basics
+Unit 5: Neural Networks and Deep Learning
+
+Subject 2: Database Management System
+Unit 1: Database Concepts
+Unit 2: ER Diagram and Relational Model
+Unit 3: SQL Queries and Joins
+Unit 4: Normalization
+Unit 5: Transactions and Concurrency
+
+Subject 3: Web Development
+Unit 1: HTML5 and CSS3
+Unit 2: JavaScript Fundamentals
+Unit 3: Frontend Framework Basics
+Unit 4: Backend Development
+Unit 5: Deployment and Hosting
+
+Subject 4: Software Engineering
+Unit 1: SDLC Models
+Unit 2: Requirement Analysis
+Unit 3: Design Principles
+Unit 4: Testing Techniques
+Unit 5: Maintenance
+
+Subject 5: Major Project
+Phase 1: Problem Selection
+Phase 2: Design and Planning
+Phase 3: Development
+Phase 4: Testing
+Phase 5: Final Presentation

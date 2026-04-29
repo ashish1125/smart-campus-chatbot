@@ -1,0 +1,14 @@
+Indrashil University
+
+Faculty Information
+
+Dr. Rajesh Patel - Vice Chancellor
+Dr. Meena Shah - Registrar
+Prof. Amit Joshi - Dean, Engineering Faculty
+Prof. Neha Trivedi - Head, Computer Engineering Department
+Prof. Karan Desai - Artificial Intelligence
+Prof. Pooja Mehta - Database Management System
+Prof. Rohan Bhatt - Web Development
+Prof. Sneha Shah - Software Engineering
+Prof. Priya Iyer - Mathematics
+Prof. Harsh Patel - Project Coordinator
