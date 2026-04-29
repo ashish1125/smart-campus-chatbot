@@ -2,24 +2,25 @@ import sqlite3
 import random
 import string
 
-# -------------------------------
+# -----------------------------------
 # Connect Database
-# -------------------------------
+# -----------------------------------
 def connect_db():
     return sqlite3.connect("campus.db")
 
 
-# -------------------------------
+# -----------------------------------
 # Generate Unique Institute Code
-# -------------------------------
+# -----------------------------------
 def generate_code():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
 
-# -------------------------------
+# -----------------------------------
 # Create Tables
-# -------------------------------
+# -----------------------------------
 def create_tables():
+
     conn = connect_db()
     cur = conn.cursor()
 
@@ -32,7 +33,14 @@ def create_tables():
         username TEXT UNIQUE,
         password TEXT,
         institute_code TEXT UNIQUE,
-        logo_path TEXT
+        logo_path TEXT,
+        address TEXT,
+        email TEXT,
+        phone TEXT,
+        instagram TEXT,
+        facebook TEXT,
+        website TEXT,
+        description TEXT
     )
     """)
 
@@ -61,8 +69,8 @@ def create_tables():
     conn.close()
 
 
-# -------------------------------
+# -----------------------------------
 # Run Automatically
-# -------------------------------
+# -----------------------------------
 create_tables()
 print("Database Ready Successfully")
